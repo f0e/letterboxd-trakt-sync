@@ -1,5 +1,3 @@
-import os
-
 from letterboxdpy import movie as LB_movie
 from letterboxdpy import user as LB_user
 from trakt import sync as T_sync
@@ -7,15 +5,22 @@ from trakt.movies import Movie as T_Movie
 from trakt.users import User as T_user
 
 from . import console
+from .config import Account
 
 # TODO: title matching? dangerous if inaccurate though.
 # TODO: monitor activity on letterboxd to avoid full scans?
 
 
-def sync_letterboxd_to_trakt():
+def sync_letterboxd_to_trakt(account: Account):
     console.print("Syncing ratings from Letterboxd to Trakt", style="purple4")
 
-    lb_user = LB_user.User(os.getenv("LETTERBOXD_USERNAME"))
+    try:
+        lb_user = LB_user.User(account.letterboxd_username)
+    except Exception as e:
+        if e.__str__() == "No user found":
+            console.print("Letterboxd user not found", style="red")
+            return
+
     trakt_user = T_user("me")
 
     trakt_movie_ratings: list[T_Movie] = trakt_user.get_ratings("movies")
@@ -28,7 +33,7 @@ def sync_letterboxd_to_trakt():
     num_lb_user_movies = len(lb_rated_user_movies)
 
     for i, (lb_movie_slug, lb_user_movie) in enumerate(lb_rated_user_movies):
-        console.print(f"{i+1}/{num_lb_user_movies}: {lb_user_movie["name"]}")
+        console.print(f"{i+1}/{num_lb_user_movies}: {lb_user_movie['name']}")
 
         lb_movie = LB_movie.Movie(lb_movie_slug)
 
@@ -60,6 +65,6 @@ def sync_letterboxd_to_trakt():
 
         # TODO: sync rating dates (not sure how to fetch this using letterboxdpy. should use film url/activity?)
         T_sync.rate(trakt_movie, lb_user_movie["rating"])
-        console.print(f"Added rating of {lb_user_movie["rating"]}", style="green")
+        console.print(f"Added rating of {lb_user_movie['rating']}", style="green")
 
     console.print("Finished syncing ratings.", style="purple4")

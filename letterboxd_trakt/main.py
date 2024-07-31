@@ -1,11 +1,20 @@
-from . import trakt_init
+from . import console, trakt_init
+from .config import load_config
 from .sync import sync_letterboxd_to_trakt
 
 
 def run():
-    trakt_init()
+    config = load_config()
+    if not config:
+        return
 
-    sync_letterboxd_to_trakt()
+    if len(config.accounts) == 0:
+        console.print("No accounts found in config.yml", style="dark_red")
+        return
+
+    for account in config.accounts:
+        trakt_init(config, account)
+        sync_letterboxd_to_trakt(account)
 
 
 if __name__ == "__main__":

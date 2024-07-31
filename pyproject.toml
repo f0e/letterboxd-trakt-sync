@@ -6,12 +6,14 @@ authors = ["f0e <7321764+f0e@users.noreply.github.com>"]
 readme = "readme.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 letterboxdpy = { git = "https://github.com/nmcassa/letterboxdpy.git" }
+pytrakt = { git = "https://github.com/f0e/python-pytrakt.git" }
 lxml = "^5.2.2"
-pytrakt = "^3.4.32"
-python-dotenv = "^1.0.1"
 rich = "^13.7.1"
+pyyaml = "^6.0.1"
+pydantic = "^2.8.2"
+beautifulsoup4 = "^4.12.3"
 
 [tool.poetry.scripts]
 letterboxd-trakt = 'letterboxd_trakt.main:run'
@@ -22,6 +24,7 @@ black = "^24.4.2"
 isort = "^5.13.2"
 mypy = "^1.11.1"
 pre-commit = "^3.8.0"
+types-pyyaml = "^6.0.12.20240724"
 
 [tool.black]
 line-length = 130

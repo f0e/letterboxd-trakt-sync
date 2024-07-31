@@ -1,37 +1,45 @@
-import os
-
 import trakt
-from dotenv import load_dotenv
 from rich.console import Console
 from trakt import core
-from trakt.errors import ForbiddenException
+from trakt.errors import ForbiddenException, OAuthException
 from trakt.users import User as T_user
 
 console = Console(highlight=False)
 
-load_dotenv()
-
 core.AUTH_METHOD = core.DEVICE_AUTH
 
 
-def trakt_init():
-    # this is pretty stupid, but i looked decently well and couldn't find 'is_logged_in' or similar? credentials should autoload when using store=True and they do, but i don't know if there's an easy way to see if they loaded successfully and are valid
+def trakt_init(config, account):
+    # set trakt globals
+    core.CLIENT_ID = account.trakt_client_id
+    core.CLIENT_SECRET = account.trakt_client_secret
+    core.OAUTH_TOKEN = account.trakt_oauth.token
+    core.OAUTH_REFRESH = account.trakt_oauth.refresh
+    core.OAUTH_EXPIRES_AT = account.trakt_oauth.expires_at
+
+    # this is pretty stupid, but i looked decently well and couldn't find 'is_logged_in' or similar?
     try:
         T_user("me")
         return
-    except ForbiddenException:
+    except (ForbiddenException, OAuthException):
         pass
 
     while True:
         try:
             res = trakt.init(
-                client_id=os.getenv("TRAKT_CLIENT_ID"),
-                client_secret=os.getenv("TRAKT_CLIENT_SECRET"),
-                store=True,
+                client_id=account.trakt_client_id,
+                client_secret=account.trakt_client_secret,
             )
 
             if res.status_code == 200:
                 console.print("Signed in to Trakt", style="dark_green")
+
+                # store oauth data
+                account.trakt_oauth.token = core.OAUTH_TOKEN
+                account.trakt_oauth.refresh = core.OAUTH_REFRESH
+                account.trakt_oauth.expires_at = core.OAUTH_EXPIRES_AT
+                config.save()
+
                 return
         except Exception:
             console.print_exception()
