@@ -22,6 +22,7 @@ You will need to view the docker logs whenever adding new accounts to your confi
 ```sh
 docker run --rm \
     --name letterboxd-trakt-sync \
+    -e RUN_ONCE=true \
     -v /<host_folder_config>:/config \
     ghcr.io/f0e/letterboxd-trakt-sync:latest
 ```
@@ -33,6 +34,8 @@ services:
   caddy:
     container_name: letterboxd-trakt-sync
     image: ghcr.io/f0e/letterboxd-trakt-sync:latest
+    environment:
+      - RUN_ONCE=true
     volumes:
       - /<host_folder_config>:/config
 ```
