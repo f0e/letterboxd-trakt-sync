@@ -31,7 +31,7 @@ docker run --rm \
 
 ```yml
 services:
-  caddy:
+  letterboxd-trakt-sync:
     container_name: letterboxd-trakt-sync
     image: ghcr.io/f0e/letterboxd-trakt-sync:latest
     environment:
