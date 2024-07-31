@@ -2,20 +2,21 @@
 
 Script to sync your Letterboxd ratings to your Trakt account.
 
+## Config
+
+- To obtain values for `trakt_client_id` and `trakt_client_secret`, [create a Trakt application](https://trakt.tv/oauth/applications) with the following values:
+  - Name: letterboxd-trakt-sync
+  - Redirect URI: `urn:ietf:wg:oauth:2.0:oob`
+  - Enable the /scrobble permission.
+- Leave the trakt_oauth values as null, these will be populated by the script.
+
 ## Usage (Manual)
 
 - Install the requirements: `python install -r requirements.txt`
 - Run the script: `python letterboxd_trakt/main.py`
-- This will generate a template config at `config.yml`, you need to fill in the values.
-  - To obtain values for `trakt_client_id` and `trakt_client_secret`, [create a Trakt application](https://trakt.tv/oauth/applications) with the following values:
-    - Name: letterboxd-trakt-sync
-    - Redirect URI: `urn:ietf:wg:oauth:2.0:oob`
-    - Enable the /scrobble permission.
-  - Leave the trakt_oauth values as null, these will be populated by the script.
+- This will generate a template config at `config.yml`, you need to [fill in the values](#config).
 
-## Usage (Docker)
-
-You will need to view the docker logs whenever adding new accounts to your config and authorise the Trakt application.
+## Setup (Docker)
 
 ### cli
 
@@ -39,6 +40,18 @@ services:
     volumes:
       - /<host_folder_config>:/config
 ```
+
+### Usage
+
+#### Initial run
+
+- On initial run a default config will be created in the `/config` directory. You then need to [fill in the values](#config).
+
+- After you have filled out your config, restart the container.
+
+- You will then need to view the docker logs to access the code required to authorise the Trakt application. (You will also need to do this whenever you add new accounts to your config). e.g.
+  - `docker logs letterboxd-trakt-sync`
+  - `> Your user code is: A84F9B0D, please navigate to https://trakt.tv/activate to authenticate`
 
 ### Optional environment variables
 
