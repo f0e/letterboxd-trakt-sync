@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "letterboxd-trakt"
+version = "0.1.0"
+description = ""
+authors = ["f0e <7321764+f0e@users.noreply.github.com>"]
+readme = "readme.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+letterboxdpy = { git = "https://github.com/nmcassa/letterboxdpy.git" }
+lxml = "^5.2.2"
+pytrakt = "^3.4.32"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.scripts]
+letterboxd-trakt = 'letterboxd_trakt.main:run'
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.5.5"
+black = "^24.4.2"
+isort = "^5.13.2"
+mypy = "^1.11.1"
+pre-commit = "^3.8.0"
+
+[tool.black]
+line-length = 130
+
+[tool.ruff]
+lint.ignore = [
+    "E501", # line length
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+check_untyped_defs = true
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
