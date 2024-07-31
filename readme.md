@@ -15,7 +15,29 @@ Script to sync your Letterboxd ratings to your Trakt account.
 
 ## Usage (Docker)
 
-Environment variables:
+You will need to view the docker logs whenever adding new accounts to your config and authorise the Trakt application.
+
+### cli
+
+```sh
+docker run --rm \
+    --name letterboxd-trakt-sync \
+    -v /<host_folder_config>:/config \
+    ghcr.io/f0e/letterboxd-trakt-sync:latest
+```
+
+### compose
+
+```yml
+services:
+  caddy:
+    container_name: letterboxd-trakt-sync
+    image: ghcr.io/f0e/letterboxd-trakt-sync:latest
+    volumes:
+      - /<host_folder_config>:/config
+```
+
+### Optional environment variables
 
 - `RUN_ONCE`: set to `true` to run the script immediately on container start.
 - `CRON_SCHEDULE`: sets the cron schedule for running the script (default: "0 */12* **")
