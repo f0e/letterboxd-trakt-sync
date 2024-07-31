@@ -4,8 +4,8 @@ if [ -z "$CRON_SCHEDULE" ]; then
     CRON_SCHEDULE="0 */12 * * *"
 fi
 
-if [ "$RUN_ONCE" == "true" ]; then
-    echo 'RUN_ONCE=true, running script'
+if [ "$RUN_ON_START" == "true" ]; then
+    echo 'RUN_ON_START=true, running script'
 
     source /app/docker/run.sh
 fi
