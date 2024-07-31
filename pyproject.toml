@@ -11,6 +11,7 @@ letterboxdpy = { git = "https://github.com/nmcassa/letterboxdpy.git" }
 lxml = "^5.2.2"
 pytrakt = "^3.4.32"
 python-dotenv = "^1.0.1"
+rich = "^13.7.1"
 
 [tool.poetry.scripts]
 letterboxd-trakt = 'letterboxd_trakt.main:run'
