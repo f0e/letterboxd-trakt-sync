@@ -1,6 +1,7 @@
-from . import console, trakt_init
+from . import console
 from .config import load_config
 from .sync import sync_letterboxd_to_trakt
+from .trakt import trakt_init
 
 
 def run():
