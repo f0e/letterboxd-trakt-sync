@@ -87,7 +87,11 @@ def get_needs_trakt_rating(
             # rated at same time, same rating. all good
             # TODO: check if rating 'times' break this, may have to round to the day
             console.print(
-                f"Trakt rating is already correct ({trakt_rating['rating']}{f" on {humanize.naturaldate(lb_rating_date)})" if lb_rating_date else ""}",
+                (
+                    f"Trakt rating is already correct ({trakt_rating['rating']}" + f" on {humanize.naturaldate(lb_rating_date)})"
+                    if lb_rating_date
+                    else ""
+                ),
                 style="dim",
             )
             return False
@@ -127,7 +131,9 @@ def get_needs_trakt_watch(
             trakt_watch_diff = abs(lb_watch_datetime - trakt_watch_datetime)
             if trakt_watch_diff <= datetime.timedelta(hours=WATCH_SEARCH_RANGE_HOURS):
                 console.print(
-                    f"Trakt already watched{f" (manually added to Trakt, time difference from Letterboxd is {humanize.precisedelta(trakt_watch_diff)})" * bool(trakt_watch_diff)}",
+                    "Trakt already watched"
+                    + " (manually added to Trakt, time difference from Letterboxd is {humanize.precisedelta(trakt_watch_diff)})"
+                    * bool(trakt_watch_diff),  # >:)
                     style="dim",
                 )
                 return False
