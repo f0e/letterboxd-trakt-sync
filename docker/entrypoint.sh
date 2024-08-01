@@ -12,7 +12,6 @@ fi
 
 echo 'Started cron'
 
-crontab /app/docker/crontab
 echo "${CRON_SCHEDULE} /app/docker/run.sh" | crontab -
 
 crond -f -l 8
