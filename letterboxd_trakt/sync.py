@@ -132,7 +132,7 @@ def get_needs_trakt_watch(
             if trakt_watch_diff <= datetime.timedelta(hours=WATCH_SEARCH_RANGE_HOURS):
                 console.print(
                     "Trakt already watched"
-                    + " (manually added to Trakt, time difference from Letterboxd is {humanize.precisedelta(trakt_watch_diff)})"
+                    + f" (manually added to Trakt, time difference from Letterboxd is {humanize.precisedelta(trakt_watch_diff)})"
                     * bool(trakt_watch_diff),  # >:)
                     style="dim",
                 )
