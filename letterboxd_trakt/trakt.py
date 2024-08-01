@@ -12,9 +12,9 @@ def trakt_init(config, account):
     # set trakt globals
     core.CLIENT_ID = account.trakt_client_id
     core.CLIENT_SECRET = account.trakt_client_secret
-    core.OAUTH_TOKEN = account.trakt_oauth.token
-    core.OAUTH_REFRESH = account.trakt_oauth.refresh
-    core.OAUTH_EXPIRES_AT = account.trakt_oauth.expires_at
+    core.OAUTH_TOKEN = account.internal.trakt_oauth.token
+    core.OAUTH_REFRESH = account.internal.trakt_oauth.refresh
+    core.OAUTH_EXPIRES_AT = account.internal.trakt_oauth.expires_at
 
     # this is pretty stupid, but i looked decently well and couldn't find 'is_logged_in' or similar?
     try:
@@ -34,9 +34,9 @@ def trakt_init(config, account):
                 console.print("Signed in to Trakt", style="dark_green")
 
                 # store oauth data
-                account.trakt_oauth.token = core.OAUTH_TOKEN
-                account.trakt_oauth.refresh = core.OAUTH_REFRESH
-                account.trakt_oauth.expires_at = core.OAUTH_EXPIRES_AT
+                account.internal.trakt_oauth.token = core.OAUTH_TOKEN
+                account.internal.trakt_oauth.refresh = core.OAUTH_REFRESH
+                account.internal.trakt_oauth.expires_at = core.OAUTH_EXPIRES_AT
                 config.save()
 
                 return

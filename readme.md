@@ -1,6 +1,8 @@
 # Letterboxd Trakt Sync
 
-Script to sync your Letterboxd ratings to your Trakt account.
+Script to sync your Letterboxd watched films and ratings to your Trakt account.
+
+> NOTE: Currently only syncs diary entries.
 
 ## Config
 
@@ -8,7 +10,7 @@ Script to sync your Letterboxd ratings to your Trakt account.
   - Name: letterboxd-trakt-sync
   - Redirect URI: `urn:ietf:wg:oauth:2.0:oob`
   - Enable the /scrobble permission.
-- Leave the trakt_oauth values as null, these will be populated by the script.
+- Leave the internal values as null, these will be populated by the script.
 
 ## Usage (Manual)
 

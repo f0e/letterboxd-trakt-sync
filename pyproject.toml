@@ -8,12 +8,13 @@ readme = "readme.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 letterboxdpy = { git = "https://github.com/nmcassa/letterboxdpy.git" }
-pytrakt = { git = "https://github.com/f0e/python-pytrakt.git" }
+pytrakt = { git = "https://github.com/f0e/python-pytrakt.git", branch = "get-history" }
 lxml = "^5.2.2"
 rich = "^13.7.1"
 pyyaml = "^6.0.1"
 pydantic = "^2.8.2"
 beautifulsoup4 = "^4.12.3"
+humanize = "^4.10.0"
 
 [tool.poetry.scripts]
 letterboxd-trakt = 'letterboxd_trakt.main:run'

@@ -1,6 +1,6 @@
 from . import console
 from .config import load_config
-from .sync import sync_letterboxd_to_trakt
+from .sync import sync_letterboxd_diary
 from .trakt import trakt_init
 
 
@@ -15,7 +15,7 @@ def run():
 
     for account in config.accounts:
         trakt_init(config, account)
-        sync_letterboxd_to_trakt(account)
+        sync_letterboxd_diary(config, account)
 
 
 if __name__ == "__main__":

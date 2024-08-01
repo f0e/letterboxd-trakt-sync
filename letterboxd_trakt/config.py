@@ -1,4 +1,5 @@
 import os
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -21,11 +22,16 @@ class TraktOAuth(BaseModel):
     expires_at: int | None = None
 
 
+class AccountInternal(BaseModel):
+    trakt_oauth: TraktOAuth = TraktOAuth()
+    last_letterboxd_diary_entry: date | None = None
+
+
 class Account(BaseModel):
     letterboxd_username: str
     trakt_client_id: str
     trakt_client_secret: str
-    trakt_oauth: TraktOAuth = TraktOAuth()
+    internal: AccountInternal = AccountInternal()
 
 
 class Config(BaseModel):
