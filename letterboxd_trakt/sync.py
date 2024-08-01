@@ -244,7 +244,7 @@ def sync_letterboxd_diary(config: Config, account: Account):
     ):  # iterate backwards since you can rate things multiple times on letterboxd but not on trakt, so we want the last rating to be the final one. yum.
         entry_rating = entry["actions"]["rating"]
 
-        console.print(f"{i+1}/{len(lb_diary_to_process)}: {entry["name"]} on {humanize.naturaldate(entry["date"])}")
+        console.print(f"{i+1}/{len(lb_diary_to_process)}: {entry['name']} on {humanize.naturaldate(entry['date'])}")
 
         if entry["slug"] not in movie_cache:
             # just in case someone watches the same movie 10000 times optimisation? whatever it's no extra code
