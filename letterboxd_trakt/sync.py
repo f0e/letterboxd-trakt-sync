@@ -157,6 +157,8 @@ def get_letterboxd_user(username: str):
             console.print("Letterboxd user not found", style="red")
             return
 
+        console.print_exception()
+
 
 def sync(
     trakt_movie_watches: list[T_Movie],
