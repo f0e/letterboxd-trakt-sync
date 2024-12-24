@@ -1,47 +1,39 @@
-[tool.poetry]
+[project]
 name = "letterboxd-trakt"
 version = "0.1.0"
-description = ""
-authors = ["f0e <7321764+f0e@users.noreply.github.com>"]
-readme = "readme.md"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-letterboxdpy = { git = "https://github.com/nmcassa/letterboxdpy.git" }
-pytrakt = { git = "https://github.com/f0e/python-pytrakt.git", branch = "get-history" }
-lxml = "^5.2.2"
-rich = "^13.7.1"
-pyyaml = "^6.0.1"
-pydantic = "^2.8.2"
-beautifulsoup4 = "^4.12.3"
-humanize = "^4.10.0"
-
-[tool.poetry.scripts]
-letterboxd-trakt = 'letterboxd_trakt.main:run'
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.5.5"
-black = "^24.4.2"
-isort = "^5.13.2"
-mypy = "^1.11.1"
-pre-commit = "^3.8.0"
-types-pyyaml = "^6.0.12.20240724"
-
-[tool.black]
-line-length = 130
-
-[tool.ruff]
-lint.ignore = [
-    "E501", # line length
+description = "Script to sync your Letterboxd ratings to your Trakt account."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.12.3",
+    "humanize>=4.11.0",
+    "letterboxdpy",
+    "lxml>=5.3.0",
+    "pydantic>=2.10.4",
+    "pytrakt",
+    "pyyaml>=6.0.2",
+    "rich>=13.9.4",
 ]
 
-[tool.isort]
-profile = "black"
+[project.scripts]
+letterboxd-trakt = 'letterboxd_trakt.main:run'
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+lint.extend-select = ["I"] # enable import sorting
 
 [tool.mypy]
 check_untyped_defs = true
 
+[tool.hatch.metadata]
+allow-direct-references = true # allow git dependencies todo: why do i need to do this
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = ["mypy>=1.14.0", "pre-commit>=4.0.1", "ruff>=0.8.4"]
+
+[tool.uv.sources]
+pytrakt = { git = "https://github.com/f0e/python-pytrakt", branch = "get-history" }
+letterboxdpy = { git = "https://github.com/f0e/letterboxdpy", branch = "fix" }

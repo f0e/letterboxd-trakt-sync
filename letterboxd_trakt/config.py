@@ -7,7 +7,9 @@ from pydantic import BaseModel
 
 from . import console
 
-CFG_PATH = Path("/config/config.yml") if os.getenv("IN_DOCKER", False) else Path("config.yml")
+CFG_PATH = (
+    Path("/config/config.yml") if os.getenv("IN_DOCKER", False) else Path("config.yml")
+)
 CFG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
@@ -64,7 +66,9 @@ class Config(BaseModel):
             yaml_data = yaml.safe_load(f)
 
             if not isinstance(yaml_data, dict):
-                console.print("Failed to load config: invalid config schema", style="red")
+                console.print(
+                    "Failed to load config: invalid config schema", style="red"
+                )
                 return None
 
             return Config(**yaml_data)
@@ -80,7 +84,8 @@ def load_config() -> Config | None:
         config.accounts = [
             account
             for account in config.accounts
-            if account.trakt_client_id != "your_trakt_client_id" and account.trakt_client_secret != "your_trakt_client_secret"
+            if account.trakt_client_id != "your_trakt_client_id"
+            and account.trakt_client_secret != "your_trakt_client_secret"
         ]
 
         return config

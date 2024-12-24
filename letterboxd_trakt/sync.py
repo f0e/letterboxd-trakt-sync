@@ -31,7 +31,9 @@ def convert_trakt_datetime_str(rated_at: str):
 def get_trakt_movie(imdb_id: str):
     trakt_search_res: list[T_Movie] = T_sync.search_by_id(imdb_id, "imdb", "movie")
     if len(trakt_search_res) == 0:
-        console.print("Couldn't find movie in Trakt. Not a movie?", style="dim dark_red")
+        console.print(
+            "Couldn't find movie in Trakt. Not a movie?", style="dim dark_red"
+        )
         return False
 
     # ensure movie is correct. check imdb id again
@@ -57,7 +59,11 @@ def get_needs_trakt_rating(
         return False
 
     trakt_rating = next(
-        (trakt_movie for trakt_movie in trakt_movie_ratings if trakt_movie["movie"]["ids"]["imdb"] == lb_imdb_id),
+        (
+            trakt_movie
+            for trakt_movie in trakt_movie_ratings
+            if trakt_movie["movie"]["ids"]["imdb"] == lb_imdb_id
+        ),
         None,
     )
 
@@ -65,7 +71,9 @@ def get_needs_trakt_rating(
         trakt_rating_datetime = convert_trakt_datetime_str(trakt_rating["rated_at"])
 
         # HACK: letterboxd dates dont have a time component, just use midnight for everything. if the user manually rated on trakt just overwrite it with this, i don't care. letterboxd should be the source of truth and noone is THAT nitpicky that they care about when on a day they rated things, right? TODO: this'll be fixed probably if i add trakt->letterboxd syncing
-        trakt_rating_datetime = trakt_rating_datetime.replace(hour=0, minute=0, second=0, microsecond=0)
+        trakt_rating_datetime = trakt_rating_datetime.replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
 
         rating_day_is_okay = True  # NOTE: if there's no rating date then default to the day being okay. if they rated in trakt on another day then it doesn't really matter. TODO: will be fixed if i add trakt->letterboxd sync
 
@@ -88,7 +96,8 @@ def get_needs_trakt_rating(
             # TODO: check if rating 'times' break this, may have to round to the day
             console.print(
                 (
-                    f"Trakt rating is already correct ({trakt_rating['rating']}" + f" on {humanize.naturaldate(lb_rating_date)})"
+                    f"Trakt rating is already correct ({trakt_rating['rating']}"
+                    + f" on {humanize.naturaldate(lb_rating_date)})"
                     if lb_rating_date
                     else ""
                 ),
@@ -171,8 +180,12 @@ def sync(
 ):
     lb_imdb_id = extract_imdb_id_from_link(lb_movie.imdb_link)
 
-    needs_trakt_rating = get_needs_trakt_rating(lb_rating, lb_rating_date, lb_imdb_id, trakt_movie_ratings)
-    needs_trakt_watch = get_needs_trakt_watch(lb_imdb_id, lb_watch_date, trakt_movie_watches)
+    needs_trakt_rating = get_needs_trakt_rating(
+        lb_rating, lb_rating_date, lb_imdb_id, trakt_movie_ratings
+    )
+    needs_trakt_watch = get_needs_trakt_watch(
+        lb_imdb_id, lb_watch_date, trakt_movie_watches
+    )
     if not needs_trakt_rating and not needs_trakt_watch:
         return False
 
@@ -202,7 +215,7 @@ def get_diary(lb_user: LB_user.User, last_diary_entry: datetime.date | None = No
 
     page = 1
     while True:
-        lb_page_diary_entries: dict[str, dict] = LB_user.user_diary(lb_user, page=page)["entrys"]
+        lb_page_diary_entries: dict[str, dict] = lb_user.get_diary(page=page)["entries"]
         if not lb_page_diary_entries:
             # reached the end.
             return lb_diary_to_process
@@ -230,12 +243,16 @@ def sync_letterboxd_diary(config: Config, account: Account):
     if not lb_user:
         return
 
-    lb_diary_to_process = get_diary(lb_user, account.internal.last_letterboxd_diary_entry)
+    lb_diary_to_process = get_diary(
+        lb_user, account.internal.last_letterboxd_diary_entry
+    )
 
     console.print("Starting diary sync from Letterboxd to Trakt", style="purple4")
 
     if len(lb_diary_to_process) == 0:
-        console.print("Nothing new to add, Trakt is already up to date", style="dim purple4")
+        console.print(
+            "Nothing new to add, Trakt is already up to date", style="dim purple4"
+        )
         return
 
     trakt_user = T_user("me")
@@ -249,7 +266,9 @@ def sync_letterboxd_diary(config: Config, account: Account):
     ):  # iterate backwards since you can rate things multiple times on letterboxd but not on trakt, so we want the last rating to be the final one. yum.
         entry_rating = entry["actions"]["rating"]
 
-        console.print(f"{i+1}/{len(lb_diary_to_process)}: {entry['name']} on {humanize.naturaldate(entry['date'])}")
+        console.print(
+            f"{i+1}/{len(lb_diary_to_process)}: {entry['name']} on {humanize.naturaldate(entry['date'])}"
+        )
 
         if entry["slug"] not in movie_cache:
             # just in case someone watches the same movie 10000 times optimisation? whatever it's no extra code
