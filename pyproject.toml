@@ -2,7 +2,7 @@
 name = "letterboxd-trakt"
 version = "0.1.0"
 description = "Script to sync your Letterboxd ratings to your Trakt account."
-readme = "README.md"
+readme = "readme.md"
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.12.3",

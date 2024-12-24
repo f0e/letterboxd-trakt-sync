@@ -7,11 +7,9 @@ RUN apk update && \
 
 ENV IN_DOCKER=true
 
-# install requirements
-COPY ./requirements.txt ./requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
-COPY ./letterboxd_trakt ./letterboxd_trakt
-COPY ./docker ./docker
+# install requirements
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ./docker/entrypoint.sh
