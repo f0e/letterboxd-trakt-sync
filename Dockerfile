@@ -1,11 +1,11 @@
-FROM python:3.11-alpine
+FROM python:3.12-alpine
 
 WORKDIR /app
 
 RUN apk update && \
     apk add git
 
-ENV IN_DOCKER true
+ENV IN_DOCKER=true
 
 # install requirements
 COPY ./requirements.txt ./requirements.txt
