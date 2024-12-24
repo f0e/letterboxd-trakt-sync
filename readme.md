@@ -14,7 +14,7 @@ Script to sync your Letterboxd watched films and ratings to your Trakt account.
 
 ## Usage (Manual)
 
-- Install the requirements: `python install -r requirements.txt`
+- Install the requirements: `pip install -r requirements.txt`
 - Run the script: `python letterboxd_trakt/main.py`
 - This will generate a template config at `config.yml`, you need to [fill in the values](#config).
 
