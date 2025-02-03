@@ -2,37 +2,37 @@
 #    uv export --frozen --no-hashes --output-file=requirements.txt
 -e .
 annotated-types==0.7.0
-beautifulsoup4==4.12.3
-certifi==2024.12.14
+beautifulsoup4==4.13.0
+certifi==2025.1.31
 cfgv==3.4.0
-charset-normalizer==3.4.0
-deprecated==1.2.15
+charset-normalizer==3.4.1
+deprecated==1.2.18
 distlib==0.3.9
-filelock==3.16.1
+filelock==3.17.0
 humanize==4.11.0
-identify==2.6.3
+identify==2.6.6
 idna==3.10
 letterboxdpy @ git+https://github.com/f0e/letterboxdpy@b8c113c3fb9faa918b288ddaf452c2c986926d0a
 lxml==5.3.0
 markdown-it-py==3.0.0
 mdurl==0.1.2
-mypy==1.14.0
+mypy==1.14.1
 mypy-extensions==1.0.0
 nodeenv==1.9.1
 oauthlib==3.2.2
 platformdirs==4.3.6
-pre-commit==4.0.1
-pydantic==2.10.4
+pre-commit==4.1.0
+pydantic==2.10.6
 pydantic-core==2.27.2
-pygments==2.18.0
-pytrakt @ git+https://github.com/f0e/python-pytrakt@e9669b5316252d228ff0b986f0f85596b95f48e1
+pygments==2.19.1
+pytrakt @ git+https://github.com/f0e/python-pytrakt@0bd6a695b0243f81d5ad026249a3a7d02ab9a5ca
 pyyaml==6.0.2
 requests==2.32.3
 requests-oauthlib==2.0.0
 rich==13.9.4
-ruff==0.8.4
+ruff==0.9.4
 soupsieve==2.6
 typing-extensions==4.12.2
 urllib3==2.3.0
-virtualenv==20.28.0
-wrapt==1.17.0
+virtualenv==20.29.1
+wrapt==1.17.2
