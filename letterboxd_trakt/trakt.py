@@ -25,21 +25,20 @@ def trakt_init(config, account):
 
     while True:
         try:
-            res = trakt.init(
+            trakt.init(
                 client_id=account.trakt_client_id,
                 client_secret=account.trakt_client_secret,
             )
 
-            if res.status_code == 200:
-                console.print("Signed in to Trakt", style="dark_green")
+            console.print("Signed in to Trakt", style="dark_green")
 
-                # store oauth data
-                account.internal.trakt_oauth.token = core.OAUTH_TOKEN
-                account.internal.trakt_oauth.refresh = core.OAUTH_REFRESH
-                account.internal.trakt_oauth.expires_at = core.OAUTH_EXPIRES_AT
-                config.save()
+            # store oauth data
+            account.internal.trakt_oauth.token = core.OAUTH_TOKEN
+            account.internal.trakt_oauth.refresh = core.OAUTH_REFRESH
+            account.internal.trakt_oauth.expires_at = core.OAUTH_EXPIRES_AT
+            config.save()
 
-                return
+            return
         except Exception:
             console.print_exception()
 
