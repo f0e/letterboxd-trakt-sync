@@ -13,6 +13,7 @@ from .trakt import trakt_init
 def run():
     config = load_config()
     if not config:
+        console.print("Config failed to load", style="dark_red")
         return
 
     if len(config.accounts) == 0:
