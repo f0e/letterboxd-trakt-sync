@@ -6,6 +6,7 @@ readme = "readme.md"
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.12.3",
+    "cronsim>=2.6",
     "humanize>=4.11.0",
     "letterboxdpy",
     "lxml>=5.3.0",
@@ -16,7 +17,7 @@ dependencies = [
 ]
 
 [project.scripts]
-letterboxd-trakt = 'letterboxd_trakt.main:run'
+letterboxd-trakt = 'letterboxd_trakt.main:main'
 
 [build-system]
 requires = ["hatchling"]

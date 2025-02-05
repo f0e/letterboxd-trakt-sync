@@ -25,7 +25,7 @@ def trakt_init(config, account):
 
     while True:
         try:
-            trakt.init(
+            res = trakt.init(
                 client_id=account.trakt_client_id,
                 client_secret=account.trakt_client_secret,
             )
@@ -33,9 +33,9 @@ def trakt_init(config, account):
             console.print("Signed in to Trakt", style="dark_green")
 
             # store oauth data
-            account.internal.trakt_oauth.token = core.OAUTH_TOKEN
-            account.internal.trakt_oauth.refresh = core.OAUTH_REFRESH
-            account.internal.trakt_oauth.expires_at = core.OAUTH_EXPIRES_AT
+            account.internal.trakt_oauth.token = res.OAUTH_TOKEN
+            account.internal.trakt_oauth.refresh = res.OAUTH_REFRESH
+            account.internal.trakt_oauth.expires_at = res.OAUTH_EXPIRES_AT
             config.save()
 
             return

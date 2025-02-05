@@ -57,5 +57,6 @@ services:
 
 ### Optional environment variables
 
-- `RUN_ON_START`: set to `true` to run the script immediately on container start.
-- `CRON_SCHEDULE`: sets the cron schedule for running the script (default: `"0 */12 * * *"`)
+- `SCHEDULED`: runs on a schedule. default is `true` in docker, `false` otherwise.
+  - `RUN_ON_START`: set to `true` to run the script immediately on container start.
+  - `CRON_SCHEDULE`: sets the cron schedule for running the script (default: `"0 * * * *"` - every hour)
