@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 
 from cronsim import CronSim
+from trakt.errors import TraktUnavailable
 
 from . import console
 from .config import load_config
@@ -11,23 +12,29 @@ from .trakt import trakt_init
 
 
 def run():
-    config = load_config()
-    if not config:
-        console.print("Config failed to load", style="dark_red")
-        return
+    try:
+        config = load_config()
+        if not config:
+            console.print("Config failed to load", style="dark_red")
+            return
 
-    if len(config.accounts) == 0:
-        console.print("No accounts found in config.yml", style="dark_red")
-        return
+        if len(config.accounts) == 0:
+            console.print("No accounts found in config.yml", style="dark_red")
+            return
 
-    for account in config.accounts:
-        trakt_init(config, account)
-        sync_letterboxd_diary(config, account)
+        for account in config.accounts:
+            trakt_init(config, account)
+            sync_letterboxd_diary(config, account)
 
-    console.print(
-        f"Sync completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-        style="green",
-    )
+        console.print(
+            f"Sync completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            style="green",
+        )
+    except TraktUnavailable:
+        console.print("Failed to sync - Trakt unavailable", style="dark_red")
+    except Exception:
+        console.print("Failed to sync - Unknown error", style="dark_red")
+        console.print_exception()
 
 
 def get_next_run_time(cron_schedule):
