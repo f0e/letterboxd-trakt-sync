@@ -1,10 +1,8 @@
 import time
 
-import trakt
 from trakt import core
 from trakt.api import TokenAuth
 from trakt.auth import config_factory, device_auth
-from trakt.errors import ForbiddenException, OAuthException
 
 from . import console
 
