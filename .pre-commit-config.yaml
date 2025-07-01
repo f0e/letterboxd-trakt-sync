@@ -7,7 +7,7 @@ repos:
     hooks:
       - id: uv-lock
       - id: uv-export
-        args: ["--frozen", "--no-hashes", "--output-file=requirements.txt"]
+        args: ["--frozen", "--no-hashes", "--no-editable", "--output-file=requirements.txt"]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
