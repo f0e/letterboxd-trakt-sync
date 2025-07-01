@@ -7,7 +7,7 @@ from trakt.errors import TraktUnavailable
 
 from . import console
 from .config import load_config
-from .sync import sync_letterboxd_diary
+from .sync import sync_letterboxd_diary, sync_letterboxd_watchlist
 from .trakt import trakt_init
 
 
@@ -27,7 +27,11 @@ def run():
                 console.print("Failed to log in to Trakt account", style="dark_red")
                 continue
 
-            sync_letterboxd_diary(config, account)
+            if account.sync_diary:
+                sync_letterboxd_diary(config, account)
+
+            if account.sync_watchlist:
+                sync_letterboxd_watchlist(config, account)
 
         console.print(
             f"Sync completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",

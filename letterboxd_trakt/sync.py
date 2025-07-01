@@ -267,7 +267,7 @@ def sync_letterboxd_diary(config: Config, account: Account):
         entry_rating = entry["actions"]["rating"]
 
         console.print(
-            f"{i+1}/{len(lb_diary_to_process)}: {entry['name']} on {humanize.naturaldate(entry['date'])}"
+            f"{i + 1}/{len(lb_diary_to_process)}: {entry['name']} on {humanize.naturaldate(entry['date'])}"
         )
 
         if entry["slug"] not in movie_cache:
@@ -292,7 +292,45 @@ def sync_letterboxd_diary(config: Config, account: Account):
         account.internal.last_letterboxd_diary_entry = entry["date"]
         config.save()
 
-    console.print("Finished syncing!", style="purple4")
+    console.print("Finished syncing diary!", style="purple4")
+
+
+def sync_letterboxd_watchlist(config: Config, account: Account):
+    lb_user = get_letterboxd_user(account.letterboxd_username)
+    if not lb_user:
+        return
+
+    console.print("Starting watchlist sync from Letterboxd to Trakt", style="purple4")
+
+    # private watchlist handling (https://github.com/nmcassa/letterboxdpy/issues/63)
+    lb_watchlist = lb_user.get_watchlist()
+
+    trakt_user = T_user("me")
+    trakt_watchlist: list[T_Movie] = trakt_user.watchlist_movies
+
+    trakt_watchlist_imdb_ids = []
+
+    for trakt_movie in trakt_watchlist:
+        if trakt_movie.imdb not in trakt_watchlist_imdb_ids:
+            trakt_watchlist_imdb_ids.append(trakt_movie.imdb)
+
+    for movie_id, movie_details in lb_watchlist["data"].items():
+        lb_movie = LB_movie.Movie(movie_details["slug"])
+        lb_imdb_id = extract_imdb_id_from_link(lb_movie.imdb_link)
+
+        if lb_imdb_id not in trakt_watchlist_imdb_ids:
+            trakt_movie = get_trakt_movie(lb_imdb_id)
+            if not trakt_movie:
+                continue
+
+            if not DRY_RUN:
+                T_sync.add_to_watchlist(trakt_movie)
+                time.sleep(TRAKT_RATE_LIMIT)
+
+            console.print(f"Added {lb_movie.title} to watchlist", style="green")
+            trakt_watchlist_imdb_ids.append(lb_imdb_id)
+
+    console.print("Finished syncing watchlist!", style="purple4")
 
 
 def full_sync_letterboxd(account: Account):

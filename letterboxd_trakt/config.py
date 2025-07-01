@@ -33,6 +33,8 @@ class Account(BaseModel):
     letterboxd_username: str
     trakt_client_id: str
     trakt_client_secret: str
+    sync_diary: bool = True
+    sync_watchlist: bool = True
     internal: AccountInternal = AccountInternal()
 
 
@@ -77,6 +79,11 @@ class Config(BaseModel):
 def load_config() -> Config | None:
     try:
         config = Config.load()
+
+        # config might be missing or have extra variables, save after loading
+        # todo: i know if you just created a config for the first time this will save pointlessly but idc
+        config.save()
+
         if not config:
             return None
 
