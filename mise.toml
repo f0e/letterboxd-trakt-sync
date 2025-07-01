@@ -1,0 +1,10 @@
+[tools]
+python = "latest"
+uv = "latest"
+watchexec = "latest"
+
+[tasks.dev]
+run = "watchexec --exts py -- uv run letterboxd-trakt"
+
+[tasks.start]
+run = "uv run letterboxd-trakt"

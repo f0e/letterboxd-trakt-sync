@@ -23,7 +23,10 @@ def run():
             return
 
         for account in config.accounts:
-            trakt_init(config, account)
+            if not trakt_init(config, account):
+                console.print("Failed to log in to Trakt account", style="dark_red")
+                continue
+
             sync_letterboxd_diary(config, account)
 
         console.print(
