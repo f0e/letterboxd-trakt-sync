@@ -37,4 +37,4 @@ dev-dependencies = ["mypy>=1.14.0", "pre-commit>=4.0.1", "ruff>=0.8.4"]
 
 [tool.uv.sources]
 pytrakt = { git = "https://github.com/f0e/python-pytrakt", branch = "get-history" }
-letterboxdpy = { git = "https://github.com/f0e/letterboxdpy", branch = "fix-lxml" }
+letterboxdpy = { git = "https://github.com/f0e/letterboxdpy" }

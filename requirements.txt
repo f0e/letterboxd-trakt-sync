@@ -7,37 +7,37 @@ beautifulsoup4==4.12.3
     # via
     #   letterboxd-trakt
     #   letterboxdpy
-certifi==2025.6.15
+certifi==2025.8.3
     # via requests
 cfgv==3.4.0
     # via pre-commit
-charset-normalizer==3.4.2
+charset-normalizer==3.4.3
     # via requests
 cronsim==2.6
     # via letterboxd-trakt
 deprecated==1.2.18
     # via pytrakt
-distlib==0.3.9
+distlib==0.4.0
     # via virtualenv
 filelock==3.18.0
     # via virtualenv
 humanize==4.12.3
     # via letterboxd-trakt
-identify==2.6.12
+identify==2.6.13
     # via pre-commit
 idna==3.10
     # via requests
-letterboxdpy @ git+https://github.com/f0e/letterboxdpy@a2f103332261f5711d08f5f64df73ff20f996c56
+letterboxdpy @ git+https://github.com/f0e/letterboxdpy@e2df22a5b780714fd8e42592b8eecbd8ed4de571
     # via letterboxd-trakt
 lxml==6.0.0
     # via
     #   letterboxd-trakt
     #   letterboxdpy
-markdown-it-py==3.0.0
+markdown-it-py==4.0.0
     # via rich
 mdurl==0.1.2
     # via markdown-it-py
-mypy==1.16.1
+mypy==1.17.1
 mypy-extensions==1.1.0
     # via mypy
 nodeenv==1.9.1
@@ -48,7 +48,7 @@ pathspec==0.12.1
     # via mypy
 platformdirs==4.3.8
     # via virtualenv
-pre-commit==4.2.0
+pre-commit==4.3.0
 pydantic==2.11.7
     # via letterboxd-trakt
 pydantic-core==2.33.2
@@ -68,12 +68,12 @@ requests==2.31.0
     #   requests-oauthlib
 requests-oauthlib==2.0.0
     # via pytrakt
-rich==14.0.0
+rich==14.1.0
     # via letterboxd-trakt
-ruff==0.12.1
+ruff==0.12.8
 soupsieve==2.7
     # via beautifulsoup4
-typing-extensions==4.14.0
+typing-extensions==4.14.1
     # via
     #   mypy
     #   pydantic
@@ -83,7 +83,9 @@ typing-inspection==0.4.1
     # via pydantic
 urllib3==2.5.0
     # via requests
-virtualenv==20.31.2
+validators==0.35.0
+    # via letterboxdpy
+virtualenv==20.33.1
     # via pre-commit
-wrapt==1.17.2
+wrapt==1.17.3
     # via deprecated
