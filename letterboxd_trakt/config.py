@@ -80,12 +80,12 @@ def load_config() -> Config | None:
     try:
         config = Config.load()
 
+        if not config:
+            return None
+
         # config might be missing or have extra variables, save after loading
         # todo: i know if you just created a config for the first time this will save pointlessly but idc
         config.save()
-
-        if not config:
-            return None
 
         # filter out template accounts
         config.accounts = [
