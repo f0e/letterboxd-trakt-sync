@@ -36,5 +36,5 @@ allow-direct-references = true # allow git dependencies todo: why do i need to d
 dev-dependencies = ["mypy>=1.14.0", "pre-commit>=4.0.1", "ruff>=0.8.4"]
 
 [tool.uv.sources]
-pytrakt = { git = "https://github.com/f0e/python-pytrakt", branch = "get-history" }
+pytrakt = { git = "https://github.com/f0e/python-pytrakt" }
 letterboxdpy = { git = "https://github.com/f0e/letterboxdpy" }

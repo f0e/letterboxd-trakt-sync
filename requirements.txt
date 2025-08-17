@@ -19,7 +19,7 @@ deprecated==1.2.18
     # via pytrakt
 distlib==0.4.0
     # via virtualenv
-filelock==3.18.0
+filelock==3.19.1
     # via virtualenv
 humanize==4.12.3
     # via letterboxd-trakt
@@ -55,7 +55,7 @@ pydantic-core==2.33.2
     # via pydantic
 pygments==2.19.2
     # via rich
-pytrakt @ git+https://github.com/f0e/python-pytrakt@19af91c29d9dfde629c9c54241a7fc6e0d248c68
+pytrakt @ git+https://github.com/f0e/python-pytrakt@1df1009bf9c36d9f969af20a97caa05dde60b97d
     # via letterboxd-trakt
 pyyaml==6.0.2
     # via
@@ -70,7 +70,7 @@ requests-oauthlib==2.0.0
     # via pytrakt
 rich==14.1.0
     # via letterboxd-trakt
-ruff==0.12.8
+ruff==0.12.9
 soupsieve==2.7
     # via beautifulsoup4
 typing-extensions==4.14.1
@@ -85,7 +85,7 @@ urllib3==2.5.0
     # via requests
 validators==0.35.0
     # via letterboxdpy
-virtualenv==20.33.1
+virtualenv==20.34.0
     # via pre-commit
 wrapt==1.17.3
     # via deprecated
