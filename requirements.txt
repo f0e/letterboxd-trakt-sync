@@ -27,7 +27,7 @@ identify==2.6.13
     # via pre-commit
 idna==3.10
     # via requests
-letterboxdpy @ git+https://github.com/f0e/letterboxdpy@e2df22a5b780714fd8e42592b8eecbd8ed4de571
+letterboxdpy @ git+https://github.com/f0e/letterboxdpy@e16879bff4a346214218905532b991330c2c8dd8
     # via letterboxd-trakt
 lxml==6.0.0
     # via
@@ -70,7 +70,7 @@ requests-oauthlib==2.0.0
     # via pytrakt
 rich==14.1.0
     # via letterboxd-trakt
-ruff==0.12.9
+ruff==0.12.10
 soupsieve==2.7
     # via beautifulsoup4
 typing-extensions==4.14.1
