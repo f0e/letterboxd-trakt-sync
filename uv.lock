@@ -195,7 +195,7 @@ dev = [
 [[package]]
 name = "letterboxdpy"
 version = "5.0"
-source = { git = "https://github.com/f0e/letterboxdpy#e16879bff4a346214218905532b991330c2c8dd8" }
+source = { git = "https://github.com/f0e/letterboxdpy#e151c0fa69e242dfd80330d05f59e9f8f968d9a5" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "lxml" },

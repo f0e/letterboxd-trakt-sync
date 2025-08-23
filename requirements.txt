@@ -27,7 +27,7 @@ identify==2.6.13
     # via pre-commit
 idna==3.10
     # via requests
-letterboxdpy @ git+https://github.com/f0e/letterboxdpy@e16879bff4a346214218905532b991330c2c8dd8
+letterboxdpy @ git+https://github.com/f0e/letterboxdpy@e151c0fa69e242dfd80330d05f59e9f8f968d9a5
     # via letterboxd-trakt
 lxml==6.0.0
     # via
